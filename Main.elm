@@ -1,17 +1,18 @@
+import Browser
 import Html exposing (Html, button, div, input, text)
 import Html.Attributes exposing (..)
 import Html.Events exposing (onClick, onInput)
 
 main =
-  Html.beginnerProgram { model = model, view = view, update = update}
+  Browser.sandbox { init = init, view = view, update = update}
 
 type alias Model =
   { counter: Int
   , content: String
   }
 
-model : Model
-model =
+init : Model
+init =
   { counter = 0
   , content = ""
   }
@@ -35,9 +36,9 @@ view : Model -> Html Msg
 view model =
   div []
     [ button [ onClick Decrement ] [ text "-" ]
-    , div [] [ text (toString model.counter) ]
+    , div [] [ text (String.fromInt model.counter) ]
     , button [ onClick Increment ] [ text "+" ]
     , input [ placeholder "Text to reverse", onInput Change] []
-    , div [] [ text (toString model.content) ]
+    , div [] [ text model.content ]
     ]
 
